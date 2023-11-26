@@ -55,7 +55,7 @@ bool resuelvecaso(){
     cout<<"Respuesta: "<<x<<" "<<y<<'\n';
     return true;
 
-    return true;
+    
 }
 int main(){
     while(resuelvecaso()){
