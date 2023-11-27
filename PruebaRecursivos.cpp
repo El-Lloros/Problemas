@@ -5,22 +5,24 @@ long long divertdo(long long n, bool& norepetido, int &digito);
 
 long long divertdo(long long n, bool& norepetido, int& digito) {
     //caso base
+  //caso base
     if (n < 10) {
         norepetido = true;
         digito = n;
         return n;
     }
     //caso recursivo
-    long long aux = divertdo(n / 10, norepetido,digito);
+    long long aux = divertdo(n / 10, norepetido, digito);
     aux = aux * 9;
+    aux++;
     if (norepetido) {
         int d = n % 10;
         aux += d - (d > digito);
     }
-    
-    norepetido = norepetido&&(n % 10 != digito);
+
+    norepetido = norepetido && (n % 10 != digito);
     digito = n % 10;
-    
+
     return aux;
 }
 
