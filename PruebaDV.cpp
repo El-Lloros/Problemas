@@ -30,7 +30,6 @@ long long entretenido(long long n){
     
     return b;
 }
-//Complejidad: a= 1 (recursion simple por division) b=10 k=0 => O(log n) siendo n el número que da el usuario.
 
 
 long long divertdo(long long n, bool& norepetido, int& digito) {
