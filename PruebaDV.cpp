@@ -25,13 +25,9 @@ long long entretenido(long long n){
             a=m+1;
 
         }
-        
     }
-    
     return b;
 }
-
-
 long long divertdo(long long n, bool& norepetido, int& digito) {
     //caso base
   //caso base
