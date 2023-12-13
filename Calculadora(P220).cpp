@@ -1,35 +1,32 @@
 #include <iostream>
 using namespace std;
 
-void calculadora(int suma, int turno, bool player, bool &pierde, int jugadas[9][4]);
 
-void calculadora(int suma, int turno, bool player, bool &pierde, int jugadas[9][4]){
-    if(jugadas[turno][0]+suma < 31 ){
-        player=!player;
-        for (int i = 0 ; i<4;i++){
-            if(jugadas[turno-1][i]+suma<31){
-                calculadora(jugadas[turno-1][i]+suma,jugadas[turno-1][i],player,pierde,jugadas);
-            }
 
-        }
-    }else{
-        if(player){
-            pierde=true;
-        }else{                
-            return;
-        }
+bool esGanadora(int valorCalculadora, int ultimoSumado,int jugadas[9][4]);
+
+bool esGanadora(int valorCalculadora, int ultimoSumado,int jugadas[9][4]){
+    if(valorCalculadora>30){
+        return true;
     }
-    
-    return;
+    bool ret=false;
+     for (int i = 0 ; i<4;i++){
+        if(esGanadora(valorCalculadora+jugadas[ultimoSumado-1][i],jugadas[ultimoSumado-1][i],jugadas)){
+            ret=false;  
+        }else{
+            return true;
+        }
+     }
+    return ret;
 }
+
 
 void casoDePrueba() {
 
     // TU CÓDIGO AQUÍ
     int suma;//suma acumulada
     int turno;//ultima tecla pulsada
-    bool player=true; //si player es true le toca jugar al jugador que importa
-    bool pierde=false;// ¿sera false hasta que encuentre una combinación que pierda?
+    
     cin>>suma;
     cin>>turno;
     int jugadas[9][4] = {//posibles jugadas segun la tecla que se ha pulsado antes
@@ -45,11 +42,11 @@ void casoDePrueba() {
     };
 
 
-    calculadora(suma,turno,player,pierde,jugadas);
-    if(pierde)
-        cout<<"PIERDE"<<"\n";
-        else
+    
+    if(esGanadora(suma,turno,jugadas))
         cout<<"GANA"<<"\n";
+        else
+        cout<<"PIERDE"<<"\n";
 } // casoDePrueba
 
 int main() {
