@@ -3,6 +3,19 @@
 using namespace std;
 bool esPosible(int k,int numeros[5],int op,int parcial);
 int operacion(int num,int operacion, int parcial );
+int operacion(int num,int operacion, int parcial ){
+    int ret;
+    if(operacion==0){
+        ret= parcial/num;
+    }else if(operacion==1){
+        ret=parcial+num;
+    }else if(operacion==2){
+        ret=parcial-num;
+    }else if(operacion==3){
+        ret=parcial*num;
+    }
+    return ret;
+}
 bool esPosible(int k,int numeros[5],int op,int parcial){
     /*IDEA: vamos probando operaciones que se aplican siempre con lo que hay en parcial
      y cuando lleguemos a 4 operaciones comprobamos si el parcial es igual que K*/
@@ -13,15 +26,18 @@ bool esPosible(int k,int numeros[5],int op,int parcial){
         }else{
             return false;
         }
-
+     }
+    bool ret = false;
     for(int i=0;i<4;i++){
+        if(numeros[op+1]==0||(parcial%numeros[op+1]!=0 && i==0)){
+            i++;
+        }
         int operamos = operacion(numeros[op+1],i,parcial);
-        if(esPosible(k,numeros,op,parcial)){
+        if(esPosible(k,numeros,op+1,operamos)){
             return true;
         }
     }
-
-     }
+    return ret;
 }
 
 
@@ -32,6 +48,7 @@ bool casoDePrueba() {
     int k,numeros[5];
     cin>>k;
     int parcial;
+
     for(int i=0;i<5;i++){
         cin>>numeros[i];
     }
