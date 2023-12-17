@@ -10,12 +10,20 @@ bool esGanadora(int valorCalculadora, int ultimoSumado,int jugadas[9][4]){
         return true;
     }
     bool ret=false;
-     for (int i = 0 ; i<4;i++){
-        if(esGanadora(valorCalculadora+jugadas[ultimoSumado-1][i],jugadas[ultimoSumado-1][i],jugadas)){
-            ret=false;  
-        }else{
-            return true;
-        }
+    if(jugadas[ultimoSumado-1][0]+valorCalculadora<=30){
+            
+            for (int i = 0 ; i<4;i++){ 
+                if(jugadas[ultimoSumado-1][i]+valorCalculadora<=30){ 
+                    if(esGanadora(valorCalculadora+jugadas[ultimoSumado-1][i],jugadas[ultimoSumado-1][i],jugadas)){
+                        ret=false;  
+                    }else{
+                        return true;
+                    }
+                }
+            }
+        
+     }else{
+        return false;
      }
     return ret;
 }
