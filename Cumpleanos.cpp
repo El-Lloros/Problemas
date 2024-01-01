@@ -14,9 +14,9 @@ typedef struct {
                                       // que siente el ninio i si se le asigna el sitio j											   
 } tMatrizSatisfacciones;
 
-void resuelve(const tMatrizSatisfacciones& sats, int h, int k,int supersticiosos,bool asientos[],int maxAsiento[], int MaxPosible,int SolParcial,int &optimo){
+void resuelve(const tMatrizSatisfacciones& sats, int h, int k,int supersticiosos,bool asientos[],int maxAsiento[], int MaxPosible,int SolParcial,int ocupados,int &optimo){
     //Caso base
-    if(k== sats.n_ninios){
+    if(k == sats.n_ninios){
         optimo=SolParcial;
         return;
     }
@@ -28,10 +28,12 @@ void resuelve(const tMatrizSatisfacciones& sats, int h, int k,int supersticiosos
             continue;
         if(sats.sat[k][i]<0)
             continue;
-        if((MaxPosible-maxAsiento[k])+(SolParcial+sats.sat[k][i])<optimo)
+           
+        if((MaxPosible-maxAsiento[k])*(ocupados<sats.n_sitios)+(SolParcial+sats.sat[k][i])<optimo)
             continue;
+        
         asientos[i]=true;
-        resuelve(sats,h,k+1,supersticiosos+(k%sats.n_sitios==i),asientos,maxAsiento,MaxPosible-maxAsiento[k],SolParcial+sats.sat[k][i],optimo);
+        resuelve(sats,h,k+1,supersticiosos+(k%sats.n_sitios==i),asientos,maxAsiento,MaxPosible-maxAsiento[k],SolParcial+sats.sat[k][i],ocupados+1,optimo);
         asientos[i]=false;
 
     }
@@ -40,7 +42,7 @@ void resuelve(const tMatrizSatisfacciones& sats, int h, int k,int supersticiosos
         return;
     //no invitar niño
     if(MaxPosible-maxAsiento[k]+SolParcial>=optimo){
-        resuelve(sats,h,k+1,supersticiosos,asientos,maxAsiento,MaxPosible-maxAsiento[k],SolParcial,optimo);
+        resuelve(sats,h,k+1,supersticiosos,asientos,maxAsiento,MaxPosible-maxAsiento[k],SolParcial,ocupados,optimo);
     } 
     
     return;
@@ -100,7 +102,7 @@ int satisfaccion_maxima(const tMatrizSatisfacciones& sats, int h) {
         MaxPosible+=maxAsiento[i];
     }
     int optimo=0;
-    resuelve(sats,h,0,0,asientos,maxAsiento,MaxPosible,0,optimo);
+    resuelve(sats,h,0,0,asientos,maxAsiento,MaxPosible,0,0,optimo);
     return optimo;
 }
 
