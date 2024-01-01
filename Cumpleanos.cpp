@@ -41,7 +41,7 @@ void resuelve(const tMatrizSatisfacciones& sats, int h, int k,int supersticiosos
     if(k==h)
         return;
     //no invitar niño
-    if(MaxPosible-maxAsiento[k]+SolParcial>=optimo){
+    if((MaxPosible-maxAsiento[k])*(ocupados<sats.n_sitios)+SolParcial>=optimo){
         resuelve(sats,h,k+1,supersticiosos,asientos,maxAsiento,MaxPosible-maxAsiento[k],SolParcial,ocupados,optimo);
     } 
     
