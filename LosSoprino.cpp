@@ -82,7 +82,7 @@ a partir de la misma, por inmersión.
 
 int num_asignaciones(const tDatos& datos) {
 	// A IMPLEMENTAR
-    
+
     int j=0;
     int coches[MAX_VEHICULOS];
     int cochesAL[MAX_VEHICULOS];
