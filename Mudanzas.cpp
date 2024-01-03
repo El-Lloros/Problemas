@@ -42,7 +42,7 @@ a partir de la misma, por inmersión.
 */
 void resuelve(const tObjetos& objetos, int capacidad_caja,int k,int cajas,int &minimo,int pesocajas[]){
     //caso base 
-    if(k==objetos.n_objetos){
+    if(k==objetos.n_objetos){ //Ya hemos decidido que hacer con todos los objetos
         minimo=cajas;
         return;
     }
@@ -50,6 +50,7 @@ void resuelve(const tObjetos& objetos, int capacidad_caja,int k,int cajas,int &m
     //caso recursivo
     for(int i=0;i<cajas;i++){
         //meto el objeto en alguna caja
+        //Comprobamos si el objeto k cabe en la caja i 
         if(pesocajas[i]+objetos.tamanios[k]<=capacidad_caja){
             pesocajas[i]+=objetos.tamanios[k];
             resuelve(objetos,capacidad_caja,k+1,cajas,minimo,pesocajas);
@@ -57,6 +58,11 @@ void resuelve(const tObjetos& objetos, int capacidad_caja,int k,int cajas,int &m
         }
         
     }
+    //Si no cabe en ninguna caja o ya hemos probado todas, creamos una caja nueva
+    /*
+    PODA:
+        Solo creamos una caja si no existe ya una solución con menos cajas
+    */
     if(cajas+1<minimo && k+1>cajas){
         
         pesocajas[cajas] += objetos.tamanios[k];
@@ -64,7 +70,7 @@ void resuelve(const tObjetos& objetos, int capacidad_caja,int k,int cajas,int &m
         pesocajas[cajas] -= objetos.tamanios[k];
         
     }
-
+    //Si llegamos cortamos la cadena de soluciones ya que este objeto no lo metemos en ningun sitio
     return;
 }
 
