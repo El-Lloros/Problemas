@@ -29,7 +29,7 @@ void resuelve(const tMatrizSatisfacciones& sats, int h, int k,int supersticiosos
         if(sats.sat[k][i]<0)
             continue;
            
-        if((MaxPosible-maxAsiento[k])*(ocupados<sats.n_sitios)+(SolParcial+sats.sat[k][i])<optimo)
+        if((MaxPosible-maxAsiento[k])*(ocupados+1<sats.n_sitios)+(SolParcial+sats.sat[k][i])<optimo)
             continue;
         
         asientos[i]=true;
