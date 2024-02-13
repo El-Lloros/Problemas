@@ -75,7 +75,7 @@ float notaRestante2//Nota que aun se puede obtener  (Si estudias todos los teama
         de aprobar si nos estudiamos los temas que nos quedan despues de K
         Para eso comprobamso que la nota que llevamos ahora (notaAcumulada) + la nota que aun podemos conseguir (notaRestante-nota del tema K (ya que no lo vamos a estudiar)) es >=5
         PODA:
-        Ademas tenemos que comprobar (Segundo IF) que tenemos posibilidades de mejorar la nota maxima ya obtenida
+        Ademas tenemos que comprobar (Segundo IF) que tenemos  posibilidades de mejorar la nota maxima ya obtenida
     */
     //No estudiamos k
     if((notaAcumulada1+notaRestante1-info_temas[k].nota_prim>=5)&&(notaAcumulada2+notaRestante2-info_temas[k].nota_sec>=5)){
