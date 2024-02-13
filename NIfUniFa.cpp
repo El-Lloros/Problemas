@@ -32,6 +32,32 @@ su resultado, y el próposito de los mismos
 */
 
 /**** PROGRAMA DE PRUEBA: NO MODIFICAR ****/
+/*
+    bool solucion(int v[],int a,int b){
+	int num_elementos=b-a;
+	//caso base
+	if(num_elementos<=2){
+		return false;
+	}
+	if (v[a]==v[b-1]){
+		return false;
+	}
+	//caso recursivo
+	int m=(a+b)/2;
+	 
+	if(v[a]==v[m]){
+		return solucion(v,m,b);
+
+	}else if(v[b-1]==v[m]){
+		return solucion(v,a,m+1);
+
+	}else{
+		return true;
+	}
+}
+
+*/
+
 bool hay_nifunifa(int v[],int a, int b){
     int numelementos=b-a;
     if(numelementos<=2){
@@ -41,7 +67,7 @@ bool hay_nifunifa(int v[],int a, int b){
         return false;
     }
 
-    int m=(b-a)/2;
+    int m=(b+a)/2;
     if(v[a]==v[m]){
         return hay_nifunifa(v,m,b);
     }else if(v[b-1]==v[m]){
@@ -50,21 +76,23 @@ bool hay_nifunifa(int v[],int a, int b){
         return true;
     }
 }
+
 bool hay_nifunifa(int a[], int n) {
 	// A IMPLEMENTAR
     int max=a[n-1];
     int min=a[0];
     int a0=0;
     int b=n-1;
+    
     if(min==max||max-min==1){
         return false;
     }else{
         int m;
-        while(b-a0>1){
+        while(b-a0>1&&a[a0]!=a[b]){
             m=(a0+b)/2;
             if(a[m]==a[b]){
                 b=m;
-            }else if(a[m]==a[b]){
+            }else if(a[m]==a[a0]){
                 a0=m;
             }else{
                 return true;
