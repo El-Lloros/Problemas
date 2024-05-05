@@ -12,6 +12,7 @@ typedef struct {
 
 
 /*
+Prueba commit
 DISEÑO DEL ALGORITMO
 
 Para superar este ejercicio, aparte de programar el algoritmo, debes 
